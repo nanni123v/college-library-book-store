@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ABESIT SHOPPING CART</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 40px;
+      background-color: #f9f9f9;
+    }
+    h1 {
+      text-align: center;
+    }
+    table {
+      width: 80%;
+      margin: 20px auto;
+      border-collapse: collapse;
+      background: #fff;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    th, td {
+      padding: 15px;
+      text-align: center;
+      border-bottom: 1px solid #ddd;
+    }
+    th {
+      background-color: #f0f0f0;
+    }
+    button {
+      padding: 5px 10px;
+      background-color: #ff4d4d;
+      border: none;
+      color: white;
+      cursor: pointer;
+    }
+    .total {
+      font-weight: bold;
+      text-align: right;
+      padding: 20px;
+      width: 80%;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+<body>
+
+<h1>🛒ABESIT  SHOPPING CART</h1>
+
+<table id="cart-table">
+  <thead>
+    <tr>
+      <th>Product</th>
+      <TH> BOOK</TH>
+      <TH> BOOK NAME</TH>
+      <th>Price (₹)</th>
+      <th>Quantity</th>
+      <th>Total (₹)</th>
+      <th>Remove</th>
+    </tr>
+  </thead>
+  <tbody id="cart-body">
+    <!-- Example Product Row -->
+    <tr>
+      <td>CSE</td>
+      <td><img src="https://snatchbooks.com/wp-content/uploads/2020/02/Software-Engineering.png" id="img" style="width:140px ; height:150px; "></td>
+      <TD>SOFTWARE ENGINEERING </TD>
+      <td class="price">400</td>
+      <td><input type="number" value="1" min="1" class="qty" onchange="updateTotal(this)"></td>
+      <td class="item-total">400</td>
+      <td><button onclick="removeItem(this)">X</button></td>
+    </tr>
+    <tr>
+      <td>ECE</td>
+      <td><img src="https://i.pinimg.com/736x/ca/17/d0/ca17d0ede7f9d7849a4b53fbc24b7ef6.jpg" id="img1" style="width:140px; height:150px;"></td>
+      <TD> BOOK :ELECTRICAL ENGINEERING</TD>
+      <td class="price">355</td>
+      <td><input type="number" value="2" min="1" class="qty" onchange="updateTotal(this)"></td>
+      <td class="item-total">710</td>
+      <td><button onclick="removeItem(this)">X</button></td>
+    </tr>
+    <tr>
+      <td>MECHANICAL</td>
+      <td><img src="https://m.media-amazon.com/images/I/91H8lYWk9qL._SL1500_.jpg" id="img2" style="width:140px; height:150px;"></td>
+        
+            
+      <TD>BOOK: MECHANICAL ENGINEERING</TD>
+
+      <td class="price">459</td>
+      <td><input type="number" value="2" min="1" class="qty" onchange="updateTotal(this)"></td>
+      <td class="item-total">918</td>
+      <td><button onclick="removeItem(this)">X</button></td>
+    </tr>
+    <tr>
+      <td>CIVIL</td>
+     
+     <td><img src="https://cdn01.sapnaonline.com/bk_images/651/9788128007651.jpg" id="img3" style="width:140px; height:150px;"></td>
+        
+     <td>BOOK:CIVIL ENGINEERING</td>
+      <td class="price">268</td>
+      <td><input type="number" value="2" min="1" class="qty" onchange="updateTotal(this)"></td>
+      <td class="item-total">536</td>
+      <td><button onclick="removeItem(this)">X</button></td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="total">
+  Grand Total: ₹<span id="grand-total">1000</span>
+</div>
+
+<script>
+  function updateTotal(input) {
+    const row = input.parentElement.parentElement;
+    const price = parseFloat(row.querySelector('.price').innerText);
+    const qty = parseInt(input.value);
+    const total = price * qty;
+    row.querySelector('.item-total').innerText = total;
+
+    calculateGrandTotal();
+  }
+
+  function removeItem(button) {
+    const row = button.parentElement.parentElement;
+    row.remove();
+    calculateGrandTotal();
+  }
+
+  function calculateGrandTotal() {
+    let grandTotal = 0;
+    const totals = document.querySelectorAll('.item-total');
+    totals.forEach(td => {
+      grandTotal += parseFloat(td.innerText);
+    });
+    document.getElementById('grand-total').innerText = grandTotal;
+  }
+
+  // Initial total calculation
+  calculateGrandTotal();
+</script>
+
+</body>
+</html>
